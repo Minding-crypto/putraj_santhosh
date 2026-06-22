@@ -505,9 +505,6 @@
     // WEB DEV SITES CONFIG — edit here to update the grid
     // ═══════════════════════════════════════════════════════════════════
     //
-    // image   → local file path, e.g. "C:\Users\santh\Downloads\blocbox.png"
-    //           or a relative path like "images/blocbox.png"
-    //
     // url     → live URL; set to "" if private
     //
     // private → true  = always-on privacy overlay, not clickable
@@ -598,8 +595,6 @@
         pills: ["React", "Node.js"],
       },
     ];
-
-    // ─── Render ──────────────────────────────────────────────────────
     const grid = document.getElementById('webdevGrid');
 
     SITES.forEach((site) => {
@@ -625,7 +620,6 @@
         </div>
       `;
 
-      // Click thumbnail → open URL (public sites only)
       card.querySelector('.webdev-thumb-wrap').addEventListener('click', () => {
         if (!site.private && site.url) window.open(site.url, '_blank', 'noopener');
       });
