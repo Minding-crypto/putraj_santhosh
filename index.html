@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Putraj Santhosh | Software Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #64748b;
+      --text-tertiary: #94a3b8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --text-tertiary: #64748b;
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --border: #1e293b;
+        --border-strong: #334155;
+      }
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+      line-height: 1.6;
+    }
+
+    .name {
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .tagline {
+      margin-top: 10px;
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .contact-row {
+      margin-top: 20px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .contact-row a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--border-strong);
+      padding-bottom: 1px;
+      transition: color 0.15s;
+    }
+
+    .contact-row a:hover { color: var(--text-primary); }
+
+    .contact-row span {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .section { margin-top: 64px; }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 28px;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .stack-cell {
+      background: var(--bg-primary);
+      padding: 20px;
+    }
+
+    .stack-cell .cat {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stack-cell .items {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .entry {
+      padding: 32px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .entry:first-child { border-top: 0.5px solid var(--border); }
+
+    .entry-title {
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .entry-role {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .entry-blurb {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 12px;
+      max-width: 640px;
+    }
+
+    .entry-tech {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      line-height: 1.75;
+      margin-bottom: 16px;
+      max-width: 640px;
+    }
+
+    .pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border: 0.5px solid var(--border);
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stat-num {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .stat-desc {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    /* ─── Web Dev Section ─── */
+
+    .webdev-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .webdev-card {
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .webdev-thumb-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--bg-secondary);
+      cursor: pointer;
+    }
+
+    /* Hover overlay for public sites */
+    .webdev-card:not([data-private="true"]) .webdev-thumb-wrap::after {
+      content: 'Visit site →';
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      color: #f1f5f9;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .webdev-card:not([data-private="true"]) .webdev-thumb-wrap:hover::after {
+      opacity: 1;
+    }
+
+    .webdev-card:not([data-private="true"]) .webdev-thumb-wrap:hover .webdev-thumb {
+      transform: scale(1.03);
+    }
+
+    /* Privacy overlay for private sites — always visible */
+    .webdev-card[data-private="true"] .webdev-thumb-wrap {
+      cursor: default;
+    }
+
+    .webdev-card[data-private="true"] .webdev-thumb-wrap::after {
+      content: 'The owner of this site has requested privacy — not publicly linked.';
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.72);
+      color: #94a3b8;
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .webdev-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .webdev-info {
+      padding: 16px 20px 8px;
+    }
+
+    .webdev-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .webdev-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .webdev-pill-row {
+      padding: 10px 20px 18px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 600px) {
+      .name { font-size: 36px; }
+      .stack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .webdev-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="name">Putraj Santhosh</div>
+    <p class="tagline">Full-stack & product engineer. I build systems that handle real complexity — from air-gapped government tools to cross-border logistics platforms.</p>
+    <div class="contact-row">
+      <a href="mailto:sanputraj1@gmail.com">sanputraj1@gmail.com</a>
+      <a href="https://www.linkedin.com/in/putraj-santhosh-07951432b/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/Minding-crypto" target="_blank">GitHub</a>
+      <span>Singapore</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-label">Stack</div>
+    <div class="stack-grid">
+      <div class="stack-cell">
+        <div class="cat">Languages</div>
+        <div class="items">TypeScript<br>Python · Java<br>SQL · VBA · C++</div>
+      </div>
+      <div class="stack-cell">
+        <div class="cat">Frameworks</div>
+        <div class="items">React Native<br>React · Node.js<br>Spring Boot · Flask<br>Angular</div>
+      </div>
+      <div class="stack-cell">
+        <div class="cat">AI / ML</div>
+        <div class="items">LLM orchestration<br>CNNs · DSP<br>MinHash LSH</div>
+      </div>
+      <div class="stack-cell">
+        <div class="cat">Infrastructure</div>
+        <div class="items">Supabase · PostgreSQL<br>ClickHouse · Redis<br>MongoDB<br>Android Studio</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Web Development</div>
+
+    <div class="webdev-grid" id="webdevGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Projects</div>
+
+    <div class="entry">
+      <div class="entry-title">Speech Impediment Learning</div>
+      <div class="entry-role">Speech Enhancement · Python · DSP · Deep Learning</div>
+      <p class="entry-blurb">Worked in the audio R&D team on a hard real-world problem: restoring speech quality in environments with unpredictable, non-stationary noise. Built a Python pipeline that fused classical Digital Signal Processing with deep learning models, targeting inference latency tight enough for real-time use.</p>
+      <p class="entry-tech">The pipeline combines spectral subtraction and Wiener filtering as a pre-processing stage to suppress stationary noise, feeding a trained deep neural network to handle residual non-stationary artefacts. Model weights were quantised post-training to hit latency targets, and the system was benchmarked across a range of noise profiles — factory floor, street traffic, and HVAC — validating SNR improvement in each environment.</p>
+      <div class="pill-row">
+        <span class="pill">DSP + deep learning pipeline</span>
+        <span class="pill">Wiener filtering</span>
+        <span class="pill">Model quantisation</span>
+        <span class="pill">Low-latency inference</span>
+        <span class="pill">SNR optimisation</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">Procure</div>
+      <div class="entry-role">Multi-agent procurement · Next.js · Express · Exa · Stripe · PostgreSQL</div>
+      <p class="entry-blurb">Express a purchase intent in plain language — AI agents discover real supplier options, run a competitive bidding and negotiation round, enforce your spending rules, and execute a Stripe sandbox payment.</p>
+      <p class="entry-tech">Two modes share a common governance and payment tail. Find mode maps a natural-language intent to live Exa-sourced options, runs supplier pitch agents, and uses an LLM judge to pick a winner. Auction mode turns the intent into a tender broadcast with two sealed bidding rounds — suppliers compete on price, fit, value-adds, and credibility before the judge ranks them. Every run then passes through governance contracts — per-run rules covering budget caps, category constraints, vendor block/allowlists, and free-text custom rules evaluated by an LLM (e.g. "halal only"). Approved runs trigger a Stripe test-mode PaymentIntent; blocked runs queue for one-click human override. Every decision, rule check, and full transcript is persisted to Postgres and surfaced in the dashboard.</p>
+      <div class="pill-row">
+        <span class="pill">Multi-agent pipeline</span>
+        <span class="pill">Exa discovery</span>
+        <span class="pill">LLM judge</span>
+        <span class="pill">Governance contracts</span>
+        <span class="pill">Stripe test-mode</span>
+        <span class="pill">Next.js · Express</span>
+        <span class="pill">PostgreSQL</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">Veridion</div>
+      <div class="entry-role">AI decision forensics · Mechanistic interpretability · Bias monitoring</div>
+      <p class="entry-blurb">An AI governance platform that turns open-weight model decisions into signed, mechanistic evidence — showing what information mattered inside the model, where it was represented, and whether changing those internal signals changes the outcome. Targeted at regulated teams in banking, HR tech, insurance, and healthcare who need more than policy checklists.</p>
+      <p class="entry-tech">The core is a local runner that audits a focused prompt family without requiring weight uploads or raw regulated data to leave the customer environment. For each decision, Veridion scores a logit margin, runs activation patching (circuit sufficiency and necessity tests), checks minimality by pruning unneeded nodes, and applies a bias-pressure screen that flags cases where the visible answer stays unchanged but the decision margin shifts against a protected proxy after FDR correction. A certificate is only issued after all gates pass — sufficiency, necessity, minimality, negative controls, and random-circuit controls. If a circuit cannot be proven, the system returns "review" or "not certifiable" instead of fabricating a mechanistic story. Output is a signed JSON/PDF artifact bundle consumed by compliance, engineering, and sales teams.</p>
+      <div class="pill-row">
+        <span class="pill">Mechanistic interpretability</span>
+        <span class="pill">Activation patching</span>
+        <span class="pill">Bias pressure monitoring</span>
+        <span class="pill">FDR-corrected statistics</span>
+        <span class="pill">Release gate</span>
+        <span class="pill">Private local runner</span>
+        <span class="pill">Signed artifact bundle</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">Waste Audit Console</div>
+      <div class="entry-role">Computer vision · Waste classification · Sustainability reporting</div>
+      <p class="entry-blurb">A browser-based audit console that lets operators scan physical waste items with a camera, classify them in real time using an AI vision model, and generate signed PDF compliance reports — all without any server-side upload of raw images.</p>
+      <p class="entry-tech">Images are captured via the device camera or file upload, base64-encoded in the browser, and sent to a vision model configured with a fail-closed ensemble policy — items with non-empty containers, visible contamination, sharp hazards, or special-disposal signals are excluded from the recyclable stream regardless of model confidence. Classification results are written to a live audit record that tracks material type, decision, confidence score, estimated weight, and CO2e avoided. A filter and search layer over the Audit Records table lets reviewers drill into any decision. The dashboard aggregates recycling rate, recyclable weight, fail-closed rate, average confidence, false-recyclable rate, and image quality score. Report generation renders an executive-summary PDF with claim boundaries, material breakdown, and audit method disclosure directly from a print template — no backend required.</p>
+      <div class="pill-row">
+        <span class="pill">Vision model classification</span>
+        <span class="pill">Fail-closed ensemble policy</span>
+        <span class="pill">Real-time audit trail</span>
+        <span class="pill">CO2e tracking</span>
+        <span class="pill">PDF report generation</span>
+        <span class="pill">Browser-native · no backend</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">DevOps Code Quality Portal</div>
+      <div class="entry-role">Full-stack · Angular · Spring Boot · PostgreSQL · SonarQube</div>
+      <p class="entry-blurb">A multi-tenant DevOps platform that lets engineering teams run automated code quality scans against any GitHub repository branch and track quality trends over time. Teams define per-project quality gate policies, manage members with role-based access, and view a live dashboard of bugs, vulnerabilities, coverage, and code smells.</p>
+      <p class="entry-tech">Built on a three-tier architecture: an Angular standalone-component frontend, a Spring Boot backend using a layered controller-service-repository pattern with Spring Data JPA, and PostgreSQL with JSONB columns for schema-flexible metric storage. Scan execution is fully asynchronous — the trigger endpoint returns a PENDING scan record immediately while a Spring @Async thread clones the repo via Git, invokes SonarQube as a subprocess, polls for completion, evaluates results against the project's policy thresholds, and persists the final run. Auth is stateless JWT via Spring Security with HMAC-SHA256 signing, enabling horizontal scaling with no session store required. Trend charts are rendered as raw SVG in the browser with no charting library — data is normalised client-side and delta KPIs computed directly from scan history.</p>
+      <div class="pill-row">
+        <span class="pill">Spring Boot</span>
+        <span class="pill">Angular</span>
+        <span class="pill">PostgreSQL + JSONB</span>
+        <span class="pill">SonarQube integration</span>
+        <span class="pill">Async scan execution</span>
+        <span class="pill">Stateless JWT auth</span>
+        <span class="pill">GitHub API</span>
+        <span class="pill">Native SVG charts</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">BookScape</div>
+      <div class="entry-role">Digital journaling platform · MongoDB · WebSockets</div>
+      <p class="entry-blurb">A journaling platform centred on a "virtual bookshelf" metaphor — giving writers a structured, book-like space for long-form thought rather than a blank note feed. Built the full product end-to-end, from data model to UI.</p>
+      <p class="entry-tech">Each document is stored as a tree of versioned content deltas, enabling full revision history without duplicating content on every save. Full-text search runs directly in MongoDB using compound text indexes across title, body, and tag fields for library-wide querying with relevance ranking. Real-time collaborative writing is handled over WebSockets with operational transformation to resolve concurrent edits, and an AI prompt engine calls an LLM API mid-session to surface contextually aware writing suggestions without interrupting the editor state.</p>
+      <div class="pill-row">
+        <span class="pill">Version-controlled editor</span>
+        <span class="pill">Full-text search</span>
+        <span class="pill">WebSocket collaboration</span>
+        <span class="pill">Operational transformation</span>
+        <span class="pill">AI prompt engine</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">BlocBox</div>
+      <div class="entry-role">Cross-border logistics · React Native · Stripe</div>
+      <p class="entry-blurb">Singaporeans can browse and buy from Malaysian e-commerce platforms, but getting the goods across the border is the hard part. BlocBox solves the last-mile problem with a proprietary locker network and a mobile app that handles reservations, payments, and multi-stage delivery tracking — all in one flow.</p>
+      <p class="entry-tech">The locker reservation engine is modelled as a finite state machine with transitions for booking, item receipt, customs verification, cross-border transit, and pickup — persisted to Supabase with row-level locking to prevent double-booking under concurrent requests. Stripe handles payment holds released only on delivery confirmation. An item legality verification layer checks declared goods against a configurable rules engine before a booking can progress, and the admin portal gives operators real-time visibility into locker occupancy and pending verifications across the whole network.</p>
+      <div class="pill-row">
+        <span class="pill">React Native</span>
+        <span class="pill">Stripe payments</span>
+        <span class="pill">Finite state machine</span>
+        <span class="pill">Supabase</span>
+        <span class="pill">Row-level locking</span>
+        <span class="pill">Legality rules engine</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">RICE Checklist Automation</div>
+      <div class="entry-role">Financial reconciliation · VBA · Gov environment</div>
+      <p class="entry-blurb">A mission-critical audit tool built for a zero-internet, air-gapped government system where off-the-shelf software isn't an option. Automated a weekly reconciliation process that previously consumed most of a working day.</p>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">&gt;15,000</div>
+          <div class="stat-desc">rows processed per run</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5 hrs → &lt;2 min</div>
+          <div class="stat-desc">weekly audit time</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Letter of Appreciation</div>
+          <div class="stat-desc">from Chief Signal Officer</div>
+        </div>
+      </div>
+      <p class="entry-tech">Built entirely in VBA to meet the air-gapped constraint with zero external dependencies. The original process used nested loops for row matching — O(n²) at 15,000 rows. The replacement loads both datasets into ADODB recordsets and builds an in-memory hash table keyed on transaction ID, reducing every lookup to O(1) and collapsing the runtime from hours to under two minutes. The tool outputs a formatted Excel audit report with colour-coded discrepancy flags, ready for direct submission.</p>
+      <div class="pill-row">
+        <span class="pill">VBA</span>
+        <span class="pill">ADODB recordsets</span>
+        <span class="pill">O(1) hash table lookups</span>
+        <span class="pill">Air-gapped environment</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">Automotive OSINT Pipeline</div>
+      <div class="entry-role">AI threat intelligence · Gemini · Llama</div>
+      <p class="entry-blurb">An autonomous engine that continuously scrapes the web for automotive cybersecurity vulnerabilities, filters noise, and produces structured compliance-aligned reports — running without human input.</p>
+      <p class="entry-tech">Raw articles and forum posts are ingested from a set of automotive security sources, then passed through MinHash locality-sensitive hashing to deduplicate near-identical content before it reaches the LLM stage — cutting downstream processing cost significantly. A dual-LLM gate uses Gemini for broad semantic relevance classification and Llama for precise CVE and regulatory entity extraction, with each model's output cross-validated to reduce false positives. Final reports are structured around ISO 21434 threat categories and auto-tagged with CVE identifiers for consumption by security teams.</p>
+      <div class="pill-row">
+        <span class="pill">MinHash LSH deduplication</span>
+        <span class="pill">Dual-LLM gate</span>
+        <span class="pill">CVE extraction</span>
+        <span class="pill">ISO 21434</span>
+        <span class="pill">Gemini · Llama</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">Gaia's Hand</div>
+      <div class="entry-role">FinTech / disaster relief · ILP · ClickHouse · Twilio</div>
+      <p class="entry-blurb">Disaster aid suffers from two problems: money moves slowly and aid can't reach people without internet. Gaia's Hand automates the full lifecycle — pooling donations, running a supplier bidding process, and distributing aid to recipients who only have a basic phone.</p>
+      <p class="entry-tech">Donation pooling and supplier payouts run over the Interledger Protocol, enabling micro-payment settlement across currency boundaries without a central intermediary. Supplier reliability scores are computed in ClickHouse using a rolling window over historical delivery fulfilment data, and the bidding engine weights bids by both price and score. Aid distribution uses Twilio to send SMS messages containing encoded redemption tokens; recipients reply with the token to trigger QR voucher generation, which local partner agents verify offline — the system works end-to-end with no smartphone or data connectivity required on the recipient's side.</p>
+      <div class="pill-row">
+        <span class="pill">Interledger Protocol</span>
+        <span class="pill">ClickHouse supplier scoring</span>
+        <span class="pill">Twilio SMS</span>
+        <span class="pill">Offline-first vouchers</span>
+        <span class="pill">Micro-payment settlement</span>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════════
+    // WEB DEV SITES CONFIG — edit here to update the grid
+    // ═══════════════════════════════════════════════════════════════════
+    //
+    // image   → local file path, e.g. "C:\Users\santh\Downloads\blocbox.png"
+    //           or a relative path like "images/blocbox.png"
+    //
+    // url     → live URL; set to "" if private
+    //
+    // private → true  = always-on privacy overlay, not clickable
+    //           false = hover shows "Visit site →", clicking opens url
+    //
+    // pills   → tech tags shown at the bottom of the card
+    //
+    // ═══════════════════════════════════════════════════════════════════
+    const SITES = [
+      {
+        name: "Kacha Kacha Studio",
+        desc: "Photography studio site — booking flow, portfolio gallery, and client contact form.",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\kacha.png",
+        url: "https://kacha-kacha-studio.netlify.app",
+        private: false,
+        pills: ["React", "Netlify Forms"],
+      },
+      {
+        name: "Gold Prosperous",
+        desc: "Cleaning and home services platform — service listings, quote requests, and online booking for residential and commercial clients.",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\goldimage.png",
+        url: "https://goldprosperous.netlify.app/",
+        private: false,
+        pills: ["React", "Netlify"],
+      },
+      {
+        name: "BlocBox — User App",
+        desc: "Cross-border locker reservations, Stripe payments, and multi-stage delivery tracking.",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\blocboximage.png",
+        url: "https://blocbox.netlify.app/",
+        private: false,
+        pills: ["React Native", "Supabase", "Stripe"],
+      },
+      {
+        name: "Admin Portal for Studios",
+        desc: "Internal operator dashboard for managing studio bookings, session schedules, and client records.",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\adminside.jpeg",
+        url: "https://kacha-kacha-studio.netlify.app",
+        private: true,
+        pills: ["React", "Supabase", "Realtime"],
+      },
+      {
+        name: "AidBud",
+        desc: "Disaster-aid platform — donation pooling, supplier bidding, and offline SMS voucher distribution.",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\aidbud.png",
+        url: "https://aidbud.netlify.app/",
+        private: false,
+        pills: ["React", "Interledger Protocol", "ClickHouse", "Twilio"],
+      },
+      {
+        name: "Beauty & Wellness",
+        desc: "Spa and wellness booking site — service listings, testimonials, and appointment scheduling.",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\beauty.png",
+        url: "",
+        private: true,   // ← flip to false + set url above to make public
+        pills: ["React", "Netlify"],
+      },
+      {
+        name: "Shop Ash",
+        desc: "E-commerce storefront — product catalogue, cart management, and Stripe checkout.",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\shopash.png",
+        url: "",
+        private: true,
+        pills: ["React", "Stripe", "Netlify"],
+      },
+      {
+        name: "TimedFocus",
+        desc: "Focus and productivity timer — Pomodoro sessions, task queue, and session analytics.",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\timedfocus.png",
+        url: "",
+        private: true,
+        pills: ["React", "Node.js"],
+      },
+      {
+        name: "Procure",
+        desc: "Multi-agent procurement — describe what you want, AI agents source options, run a competitive bid, enforce spending rules, and execute payment.",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\procure.png",
+        url: "",
+        private: true,
+        pills: ["Next.js", "Express", "Exa", "Stripe", "PostgreSQL"],
+      },
+      {
+        name: "Procure",
+        desc: "Focus and productivity Study Buddy",
+        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\bookscape.png",
+        url: "",
+        private: true,
+        pills: ["React", "Node.js"],
+      },
+    ];
+
+    // ─── Render ──────────────────────────────────────────────────────
+    const grid = document.getElementById('webdevGrid');
+
+    SITES.forEach((site) => {
+      const card = document.createElement('div');
+      card.className = 'webdev-card';
+      card.dataset.private = String(site.private);
+
+      card.innerHTML = `
+        <div class="webdev-thumb-wrap">
+          <img
+            class="webdev-thumb"
+            src="${site.image}"
+            alt="${site.name} screenshot"
+            loading="lazy"
+          />
+        </div>
+        <div class="webdev-info">
+          <div class="webdev-name">${site.name}</div>
+          <div class="webdev-desc">${site.desc}</div>
+        </div>
+        <div class="webdev-pill-row">
+          ${site.pills.map(p => `<span class="pill">${p}</span>`).join('')}
+        </div>
+      `;
+
+      // Click thumbnail → open URL (public sites only)
+      card.querySelector('.webdev-thumb-wrap').addEventListener('click', () => {
+        if (!site.private && site.url) window.open(site.url, '_blank', 'noopener');
+      });
+
+      grid.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
