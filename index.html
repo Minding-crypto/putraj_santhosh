@@ -505,6 +505,9 @@
     // WEB DEV SITES CONFIG — edit here to update the grid
     // ═══════════════════════════════════════════════════════════════════
     //
+    // image   → local file path, e.g. "C:\Users\santh\Downloads\blocbox.png"
+    //           or a relative path like "images/blocbox.png"
+    //
     // url     → live URL; set to "" if private
     //
     // private → true  = always-on privacy overlay, not clickable
@@ -517,7 +520,7 @@
       {
         name: "Kacha Kacha Studio",
         desc: "Photography studio site — booking flow, portfolio gallery, and client contact form.",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\kacha.png",
+        image: "images/kacha.png",
         url: "https://kacha-kacha-studio.netlify.app",
         private: false,
         pills: ["React", "Netlify Forms"],
@@ -525,7 +528,7 @@
       {
         name: "Gold Prosperous",
         desc: "Cleaning and home services platform — service listings, quote requests, and online booking for residential and commercial clients.",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\goldimage.png",
+        image: "images/goldimage.png",
         url: "https://goldprosperous.netlify.app/",
         private: false,
         pills: ["React", "Netlify"],
@@ -533,7 +536,7 @@
       {
         name: "BlocBox — User App",
         desc: "Cross-border locker reservations, Stripe payments, and multi-stage delivery tracking.",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\blocboximage.png",
+        image: "images/blocboximage.png",
         url: "https://blocbox.netlify.app/",
         private: false,
         pills: ["React Native", "Supabase", "Stripe"],
@@ -541,7 +544,7 @@
       {
         name: "Admin Portal for Studios",
         desc: "Internal operator dashboard for managing studio bookings, session schedules, and client records.",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\adminside.jpeg",
+        image: "images/adminside.jpeg",
         url: "https://kacha-kacha-studio.netlify.app",
         private: true,
         pills: ["React", "Supabase", "Realtime"],
@@ -549,7 +552,7 @@
       {
         name: "AidBud",
         desc: "Disaster-aid platform — donation pooling, supplier bidding, and offline SMS voucher distribution.",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\aidbud.png",
+        image: "images/aidbud.png",
         url: "https://aidbud.netlify.app/",
         private: false,
         pills: ["React", "Interledger Protocol", "ClickHouse", "Twilio"],
@@ -557,15 +560,15 @@
       {
         name: "Beauty & Wellness",
         desc: "Spa and wellness booking site — service listings, testimonials, and appointment scheduling.",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\beauty.png",
+        image: "images/beauty.png",
         url: "",
-        private: true,   // ← flip to false + set url above to make public
+        private: true,
         pills: ["React", "Netlify"],
       },
       {
         name: "Shop Ash",
         desc: "E-commerce storefront — product catalogue, cart management, and Stripe checkout.",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\shopash.png",
+        image: "images/shopash.png",
         url: "",
         private: true,
         pills: ["React", "Stripe", "Netlify"],
@@ -573,7 +576,7 @@
       {
         name: "TimedFocus",
         desc: "Focus and productivity timer — Pomodoro sessions, task queue, and session analytics.",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\timedfocus.png",
+        image: "images/timedfocus.png",
         url: "",
         private: true,
         pills: ["React", "Node.js"],
@@ -581,20 +584,22 @@
       {
         name: "Procure",
         desc: "Multi-agent procurement — describe what you want, AI agents source options, run a competitive bid, enforce spending rules, and execute payment.",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\procure.png",
+        image: "images/procure.png",
         url: "",
         private: true,
         pills: ["Next.js", "Express", "Exa", "Stripe", "PostgreSQL"],
       },
       {
-        name: "Procure",
-        desc: "Focus and productivity Study Buddy",
-        image: "C:\\Users\\santh\\Desktop\\Desktop_Folder\\portfolio_website_2026\\images\\bookscape.png",
+        name: "BookScape",
+        desc: "Digital journaling platform built around a virtual bookshelf — version-controlled editor, full-text search, and real-time collaborative writing.",
+        image: "images/bookscape.png",
         url: "",
         private: true,
-        pills: ["React", "Node.js"],
+        pills: ["React", "MongoDB", "WebSockets"],
       },
     ];
+
+    // ─── Render ──────────────────────────────────────────────────────
     const grid = document.getElementById('webdevGrid');
 
     SITES.forEach((site) => {
@@ -620,6 +625,7 @@
         </div>
       `;
 
+      // Click thumbnail → open URL (public sites only)
       card.querySelector('.webdev-thumb-wrap').addEventListener('click', () => {
         if (!site.private && site.url) window.open(site.url, '_blank', 'noopener');
       });
